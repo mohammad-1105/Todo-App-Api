@@ -19,12 +19,12 @@ app.use(
 
 // import routes 
 import { router as userRouter } from "./routes/user.route.js";
-
+import {router as todoRouter } from "./routes/todo.router.js"
 
 
 // route declarations
 app.use("/api/v1/user", userRouter);
-
+app.use("/api/v1/todo", todoRouter);
 
 
 

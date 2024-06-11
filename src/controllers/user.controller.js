@@ -46,7 +46,7 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   // create user
-  const newUser = await UserModel.create({
+  const newUser = new UserModel({
     fullName,
     email,
     password,
