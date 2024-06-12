@@ -2,6 +2,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import errorHandler from "./middlewares/errorHandler.middleware.js"
+import compression from "compression";
 
 export const app = express();
 
@@ -16,6 +17,19 @@ app.use(
     credentials: true,
   })
 );
+
+function shouldCompress(req, res) {
+  // Check for custom header to skip compression
+  if (req.headers['x-no-compression']) {
+    return false;
+  }
+  // Use default filter function for compression
+  return compression.filter(req, res);
+}
+
+// Apply compression middleware with custom filter
+app.use(compression({ filter: shouldCompress }));
+
 
 // import routes 
 import { router as userRouter } from "./routes/user.route.js";
