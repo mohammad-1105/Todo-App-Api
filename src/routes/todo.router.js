@@ -7,6 +7,7 @@ import {
   getInCompletedTodos,
   getTodo,
   getTodos,
+  toggleCompleteTodo,
   updateTodo,
 } from "../controllers/todo.controller.js";
 
@@ -21,3 +22,4 @@ router.route("/get-todos").get(getTodos);
 router.route("/delete-todo/:todoId").delete(deleteTodo);
 router.route("/completed").get(getCompletedTodos);
 router.route("/incompleted").get(getInCompletedTodos);
+router.route("/toggle/:todoId").patch(toggleCompleteTodo)

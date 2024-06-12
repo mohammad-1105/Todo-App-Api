@@ -170,6 +170,19 @@ const getInCompletedTodos = asyncHandler(async (req, res) => {
   }
 });
 
+const toggleCompleteTodo = asyncHandler(async (req, res) => {
+  const { todoId } = req.params;
+  const todo = await TodoModel.findById(todoId);
+  if (!todo) {
+    throw new ApiError(404, "Todo not found");
+  }
+  todo.complete = !todo.complete;
+  await todo.save();
+  return res
+    .status(200)
+    .json(new ApiResponse(200, "Todo updated successfully", todo));
+});
+
 // export controllers
 export {
   createTodo,
@@ -179,4 +192,5 @@ export {
   deleteTodo,
   getCompletedTodos,
   getInCompletedTodos,
+  toggleCompleteTodo
 };
