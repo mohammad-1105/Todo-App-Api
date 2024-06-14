@@ -97,6 +97,10 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new ApiError(500, "Failed to generate tokens");
   }
 
+  const loggedInUser = await UserModel.findById(user._id).select(
+    "-password -refreshAccessToken"
+  );
+
   // return res and set cookies
   return res
     .status(200)
@@ -104,8 +108,9 @@ const loginUser = asyncHandler(async (req, res) => {
     .cookie("refreshAccessToken", refreshAccessToken, cookieOptions)
     .json(
       new ApiResponse(200, "Logged in Successfully.", {
-        accessToken: accessToken,
-        refreshAccessToken: refreshAccessToken,
+        user: loggedInUser,
+        accessToken,
+        refreshAccessToken,
       })
     );
 });
