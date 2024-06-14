@@ -30,7 +30,7 @@ This is a Todo API application built with Node.js, Express, and MongoDB. The app
 1. clone the repository
 
 ```bash
-git clone https://github.com/yourusername/todo-api.git
+git clone https://github.com/mohammad-1105/Todo-App-Api.git
 cd todo-api
 ```
 
